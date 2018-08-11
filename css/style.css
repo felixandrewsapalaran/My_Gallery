@@ -1,0 +1,144 @@
+/* Base Styles -------------------------------- */
+
+body {
+	font-family: 'Nunito', sans-serif;
+	line-height: 1.5;
+	color: #384047;
+	padding: 10px 0 80px;
+}
+div {
+	max-width: 610px;
+	margin: auto;
+}
+ul {
+	list-style: none;
+	padding: 0;
+}
+li {
+	margin-bottom: 14px;
+}
+a {
+	color: #4183c4;
+}
+
+/* Substring Matching Attribute Selectors ---- */
+
+
+/*
+So, first up, we’ll take a look at what’s called the begins with attribute selector, because it targets an element whose attribute value begins with what we specify in the selector. So it begins with a certain piece of the value string.
+*/
+
+
+
+/*So let's say that we need to target all external links on the page. Well, with the begins with attribute selector, we can use this every specific piece of the href attribute, to match those elements. Here we'll create our new selector.*/
+
+a[href^="http://"] { /*We create our new selector, by first selecting the anchor element, followed by a set of square brackets. In between the square brackets, we'll specify that we're selecting a length href attribute. We'll then folow that with the carat character, and an equals sign. Next we need to specify the beginning of the value we want to target, which in our case is http:// . So in this selector, the carat character "^" is what defines the begins with selector. And it's what tells the browser to match this specific piece of code, that's at the beginning of a links href attribute value.*/
+
+
+    color: #52bab3;
+    text-decoration: none;
+    background-repeat: no-repeat;
+    background-size: 18px 18px; /*we can revisit our handy begins with selector rule, and add the new declarations there. Check the three href declaration below. */
+    padding-left: 25px; /*Let's give it a left padding just to add a little bit of space between the icon and the link.*/
+  
+  /*We'll need t add a few styles that define the size of the icons and prevent the backgrounds from repeating. So this desgin  or declaration is applied to these: a[href$=".pdf, .jpg, .zip"]*/
+    
+  /*background-repeat: no-repeat; This will prevent the background image to repeat
+    background-size: 18px 18px;
+    padding-left: 25px;*/ /*Let's give it a padding just to add a little space between the icon and the link.*/
+  
+  /*Let's cut this declaration here and paste it into our new contain selector located the bottom in line 101.*/
+  
+  
+}
+
+
+/*Summary: You can see how the browser targets only those links at the bottom of the page, containing that http:// at the beginning of their href values. So, it only checks for the beginning of the string in an attribute. Please note that if you remove the 2 forward slashes it still going to work because the href value still begins wih http: .*/
+
+
+
+/*Similar to the begins with selector, the ends with selector targets an element with an attribute value, that ends with the piece of code or a substring we specify in the selector.*/
+
+
+
+/* Wouldn't it be great if we could display an icon for each of the file type in front of the links, based on this specific piece of code in the href attribute. Because remember, we're trying not to add any hooks to our HTML. So let's take advantage of the ends with selector to do that.*/
+
+
+
+
+
+a[href$=".pdf"] { /*First target an anchor element, href attribute. This time we'll use a dollar sign to target href values ending with .pdf. In the ends with selector, the dollar sign is what tells the browser to match a substring that's at the end of an attribute's value.*/
+
+  background-image: url('../img/icn-pdf.svg'); /*This declaration used in order to add a background image of pdf icon for this link.*/
+  
+}
+
+
+/*Samething applied to these both end with selector.*/
+
+a[href$=".jpg"] { 
+
+  background-image: url('../img/icn-picture.svg'); /*This declaration used in order to add a background image of pdf icon for this link.*/
+  
+  
+}
+
+
+
+a[href$=".zip"] {
+
+  background-image: url('../img/icn-zip.svg');   /*This declaration used in order to add a background image of pdf icon for this link.*/
+  
+}
+
+/*Summary: So, there's one more thing we need to do here. We'll need to add a few styles that define the size of the icons and prevent the background from repeating. So, instead of repeating those styles by adding them to these three href selectors above, we can revisit our handy begins with selector rule, and add the new declarations there. */
+
+
+
+/*Let's create our new contains selector by once again targetting an anchor element.*/
+
+
+a[href*="downloads"] { /*Here we used the asterisk character to tell the browser that we're selecting every anchor element who's href attribute contains the word downloads anywhere in the value. So in this selector, the asterisk is what defines the contains selector. Because, again, it tells the browser to match a value string that contains downloads anywhere in the value and it doesn't matter if there are spaces before or after the substring, the browser will still match it.*/
+  
+  
+  background-repeat: no-repeat; 
+    background-size: 18px 18px;
+    padding-left: 25px;
+
+/*Here we pasted the declaration we cut in line 46 just to see the difference between "begins with", "ends with" and the third substring attribute selector "contains" */
+
+  
+/*Summary: As we can see everything still looks and works exactly the same. But the difference is that the browser is now matching the anchor elements that contains downloads anywhere in the href attribute. So it's still matching the three download links but it's matching a different piece of the href attribute's value.*/  
+}
+
+
+/*Next, let's go over another useful example of the contained selector. So let's say that now we need to target our thumbnail images and apply a border and some margins. Well, ini our index.html file you'll notice that the image elements contained the word thumbnails in their source attribute value. So we can actaully use the word thumbnails in our selector as the piece of the source value we'll want to target.*/
+
+
+
+img[src*="thumb"] { /*We'll again use the asterisk character. To tell the browser that we're selecting any image whose source attribute contains the word, thumbnails, anywhere in the value. In fact, let
+  s go ahead and use thumb instead of thumbnails. Just so we can see how specific we can actually get with the selector.*/
+  
+  margin: 4px;
+  border: solid 2px;
+  width: 180px;
+  height: 140px;
+  
+
+}
+
+/*Summary: Now let's take a look at our gallery, we can see how the browser targets and styles all the thumbnails in our galleries. So now, if all of our thumbnails need to have these particular styles, it doesn't matter how many we have on our page or in our site, as long as the thumbnail source points to the thumbnails directory which is thumbnail in this case, it will still take on those styles.*/
+
+
+
+/*Similarly, if we need to target a particular image without giving it a class, we can still do that with the contains attribute selector. For example, to target the lake image here, just the lake image we can tell the browser to match the substring, lake thats in the souce attribute.*/
+
+
+
+img[src*="lake"] {  /*This declaration will target that image lake specifically.*/
+
+border-color: red; /*This declaration will give that image lake a red border.*/
+}
+
+/*When you refresh the page, notice how the browser matches that lake image, because its source value does in fact contain the word lake somewhere in the value.*/
+
